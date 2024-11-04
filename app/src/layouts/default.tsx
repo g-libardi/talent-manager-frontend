@@ -7,13 +7,15 @@ export default function Default() {
     <div className="w-dvw h-dvh">
       <SidebarProvider>
         <DefaultSidebar />
-        <main>
+        <div className="flex flex-col w-full h-full">
           <header className="flex items-center">
-          <SidebarTrigger />
-          <h1 className="">Talent Manager</h1>
+            <SidebarTrigger />
+            <h1 className="">Talent Manager</h1>
           </header>
-          <Outlet />
-        </main>
+          <main className="flex-1">
+            <Outlet />
+          </main>
+        </div>
       </SidebarProvider>
     </div>
   )

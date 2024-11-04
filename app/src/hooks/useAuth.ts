@@ -9,6 +9,10 @@ export interface Credentials {
     password: string;
 }
 
+export interface AccessToken {
+    user_id: string;
+}
+
 
 export default function useAuth() {
     const toast = useToast();
@@ -26,7 +30,6 @@ export default function useAuth() {
                     refreshToken: data.refresh,
                }
             }));
-            console.log(data);
         } catch (error) {
             store((state) => ({
                 auth: {
@@ -53,13 +56,34 @@ export default function useAuth() {
     async function logout() {
         try {
             await axios.delete('/api/login/token-pair');
+            store((state) => ({
+                auth: {
+                    ...state.auth,
+                    accessToken: null,
+                    refreshToken: null,
+                }
+            }));
         } catch (error) {
             return Promise.reject(error);
         }
     }
+
+
+    // WARN: This function is just a placeholder, it should be replaced with a real user info fetcher
+    function getUserInfo() {
+        const token = useStore.getState().auth.accessToken as AccessToken;
+        if (!token) return null;
+        const userInfo = {
+            username: `User ${token.user_id}`,
+        }
+        return userInfo;
+    }
+
+
     return {
         login,
         refreshToken,
         logout,
+        getUserInfo,
     }
 }

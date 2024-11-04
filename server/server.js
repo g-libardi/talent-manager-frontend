@@ -1,4 +1,5 @@
 const axios = require('axios');
+const jwtDecode = require('jwt-decode').jwtDecode;
 require('dotenv').config();
 const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
@@ -36,7 +37,8 @@ app.post('/api/login/token-pair', async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000 // 1 day in milliseconds
     });
 
-    return res.status(apiResponse.status).json({ message: 'Login successful' });
+    const decoded = { access: jwtDecode(access), refresh: jwtDecode(refresh) };
+    return res.status(apiResponse.status).json(decoded);
   } catch (error) {
     console.error(error);
     return res.status(401).json({ message: "Invalid credentials" });
@@ -60,7 +62,8 @@ app.post('/api/login/access-token', async (req, res) => {
       maxAge: 30 * 60 * 1000 // 30 minutes in milliseconds
     });
 
-    return res.status(apiResponse.status).json({ message: 'Access token refreshed' });
+    const decoded = { access: jwtDecode(access) };
+    return res.status(apiResponse.status).json(decoded);
   } catch (error) {
     console.error(error);
     return res.status(401).json({ message: "Invalid refresh token" });

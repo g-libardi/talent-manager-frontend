@@ -45,7 +45,6 @@ function getPageConfig(module: PageModule) {
 
 /* --- begin main code --- */
 const routeFiles = import.meta.glob<PageModule>('/src/pages/**/[a-z\[]*.tsx', { eager: true })
-console.log(routeFiles)
 const routes = Object.keys(routeFiles).map((path) => {
   const route = pathToRoute(path)
   const pageConfig = getPageConfig(routeFiles[path])

@@ -1,6 +1,8 @@
 
 import axios from 'axios';
+import useToast from './useToast';
 
+const toast = useToast();
 
 export interface Credentials {
     username: string;
@@ -8,17 +10,18 @@ export interface Credentials {
 }
 
 
-export async function login(credentials: Credentials) {
+async function login(credentials: Credentials) {
     try {
-        const response = await axios.post('/api/login/token-pair', credentials);
-        return response.data;
+        const response = axios.post('/api/login/token-pair', credentials);
+        toast.promise(response, 'Login successful!', 'Login failed, verify your credentials.');
+        return (await response).data;
     } catch (error) {
         return Promise.reject(error);
     }
 }
 
 
-export async function refreshToken() {
+async function refreshToken() {
     try {
         const response = await axios.post('/api/login/access-token');
         return response.data;
@@ -28,7 +31,7 @@ export async function refreshToken() {
 }
 
 
-export async function logout() {
+async function logout() {
     try {
         await axios.delete('/api/login/token-pair');
     } catch (error) {

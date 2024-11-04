@@ -24,4 +24,5 @@ export default create(
         {
             name: 'app-state',
         }
-    ));
+    )
+);

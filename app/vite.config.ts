@@ -17,5 +17,11 @@ export default defineConfig({
     watch: {
       usePolling: true,
     },
+    proxy: {
+      '/api': {
+        target: 'http://192.168.15.5:5000',
+        changeOrigin: true,
+      },
+    },
   },
 })

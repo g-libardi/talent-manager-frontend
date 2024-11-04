@@ -26,7 +26,8 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ]
+      ],
+      "@layouts/*": ["./src/layouts/*"],
     }
   },
   "include": ["src"]

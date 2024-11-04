@@ -68,6 +68,14 @@ app.post('/api/login/access-token', async (req, res) => {
 });
 
 
+app.delete('/api/login/token-pair', (_req, res) => {
+  res.clearCookie('access_token');
+  res.clearCookie('refresh_token');
+  res.status(200).json({ message: 'Logout successful' });
+});
+
+
+
 // Proxy for other /api requests, adding Authorization header from the cookie
 app.use('/api', createProxyMiddleware({
   target: API_URL,

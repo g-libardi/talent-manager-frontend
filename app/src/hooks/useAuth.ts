@@ -3,11 +3,14 @@ import axios from 'axios';
 import useToast from './useToast';
 import useStore from './useStore';
 import { AccessToken, Credentials } from '@/types/auth';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 
 export default function useAuth() {
     const toast = useToast();
     const store = useStore.setState;
+    const navigate = useNavigate();
 
     async function login(credentials: Credentials) {
         try {
@@ -60,6 +63,20 @@ export default function useAuth() {
     }
 
 
+    function verifyToken() {
+        const token = useStore.getState().auth.accessToken as AccessToken;
+        const refToken = useStore.getState().auth.refreshToken;
+        if (!token || !refreshToken) return false;
+        if (token.exp < Date.now() / 1000) {
+            if (refToken.exp < Date.now() / 1000) {
+                logout();
+            }
+            refreshToken();
+        }
+        return true;
+    }
+
+
     // WARN: This function is just a placeholder, it should be replaced with a real user info fetcher
     function getUserInfo() {
         const token = useStore.getState().auth.accessToken as AccessToken;
@@ -69,6 +86,13 @@ export default function useAuth() {
         }
         return userInfo;
     }
+
+    useEffect(() => {
+        if (getUserInfo() === null || verifyToken() === false) {
+            logout();
+            navigate('/login');
+        }
+    }, []);
 
 
     return {

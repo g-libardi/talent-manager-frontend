@@ -1,11 +1,12 @@
 
 
 export interface Credentials {
-    username: string;
-    password: string;
+  username: string;
+  password: string;
 }
 
 
 export interface AccessToken {
-    user_id: string;
+  user_id: string;
+  exp: number;
 }

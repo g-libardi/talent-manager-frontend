@@ -17,7 +17,7 @@ export default function CreateCandidate() {
       </DialogTrigger>
 
 
-      <DialogContent className="max-w-[90%] max-h-[90%] overflow-auto">
+      <DialogContent className="max-w-[90%] max-h-[90%] overflow-auto lg:max-w-[50%]">
         <DialogHeader>
           <DialogTitle>Create candidate</DialogTitle>
           <DialogDescription>

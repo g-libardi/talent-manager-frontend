@@ -139,7 +139,7 @@ export default function CandidateCreationForm() {
         />
 
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="w-full">Save</Button>
       </form>
     </Form>
   )

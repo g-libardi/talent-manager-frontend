@@ -18,7 +18,7 @@ export default function useCandidates() {
   }
 
 
-  async function fetch(query: QueryParams) {
+  async function read(query: QueryParams = {}) {
     try {
       const response = await axios.get('/api/candidates/', { params: query });
       return response.data;
@@ -62,8 +62,8 @@ export default function useCandidates() {
 
   return {
     getOne,
-    fetch,
     create,
+    read,
     update,
     remove,
   }

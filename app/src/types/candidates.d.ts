@@ -2,17 +2,15 @@
 
 export interface Candidate {
   id?: number,
-  firstName: string;
-  lastName: string;
-  birtDate: string;
+  first_name: string;
+  last_name: string;
+  birt_date: string;
   skills: string;
   status: 'APPLIED' | 'REJECTED' | 'INVITED' | 'HIRED';
 }
 
 
 export interface CandidatesQueryParams {
-  page: number;
-  limit: number;
-  search: string;
-  status: Candidate['status'];
+  search?: string;
+  status?: Candidate['status'];
 }

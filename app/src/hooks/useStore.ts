@@ -1,15 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-
-
-interface AppState {
-    auth: {
-        accessToken: Object | null;
-        refreshToken: Object | null;
-        setAccessToken: (accessToken: Object | null) => void;
-        setRefreshToken: (refreshToken: Object | null) => void;
-    },
-}
+import { AppState } from '@/types/store';
 
 
 export default create(

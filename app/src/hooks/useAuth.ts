@@ -2,16 +2,7 @@
 import axios from 'axios';
 import useToast from './useToast';
 import useStore from './useStore';
-
-
-export interface Credentials {
-    username: string;
-    password: string;
-}
-
-export interface AccessToken {
-    user_id: string;
-}
+import { AccessToken, Credentials } from '@/types/auth';
 
 
 export default function useAuth() {

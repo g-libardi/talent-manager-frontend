@@ -1,7 +1,7 @@
 
 
 export interface Candidate {
-  id: number,
+  id?: number,
   firstName: string;
   lastName: string;
   birtDate: string;

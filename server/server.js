@@ -2,13 +2,13 @@ const axios = require('axios');
 const jwtDecode = require('jwt-decode').jwtDecode;
 require('dotenv').config();
 const express = require('express');
-const { createProxyMiddleware } = require('http-proxy-middleware');
+const proxy = require('express-http-proxy');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 
 
 const app = express();
-const API_URL = process.env.API_URL || 'http://localhost:8000';
+const API_URL = process.env.API_URL || 'http://localhost:8000/api';
 
 app.use(cookieParser());
 app.use(express.json());
@@ -78,16 +78,16 @@ app.delete('/api/login/token-pair', (_req, res) => {
 });
 
 
-
-// Proxy for other /api requests, adding Authorization header from the cookie
-app.use('/api', createProxyMiddleware({
-  target: API_URL,
-  changeOrigin: true,
-  onProxyReq: (proxyReq, req) => {
-    const token = req.cookies['access_token'];
+app.use('/api', proxy('localhost:8000', {
+  proxyReqPathResolver: function(req) {
+    return '/api' + req.url;
+  },
+  proxyReqOptDecorator: function(proxyReqOpts, srcReq) {
+    const token = srcReq.cookies['access_token'];
     if (token) {
-      proxyReq.setHeader('Authorization', `Bearer ${token}`);
+      proxyReqOpts.headers['jwtAuth'] = `Bearer ${token}`;
     }
+    return proxyReqOpts;
   }
 }));
 
@@ -97,6 +97,7 @@ app.use(express.static(path.join(__dirname, 'static')));
 
 // Serve React app for all other routes
 app.get('*', (_req, res) => {
+  console.log('Serving React app');
   res.sendFile(path.join(__dirname, 'static', 'index.html'));
 });
 

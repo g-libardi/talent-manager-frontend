@@ -17,15 +17,15 @@ import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } fro
 
 
 const menuItems = [
-  {
-    title: 'Home',
-    icon: HomeIcon,
-    to: '/',
-  },
+  //{
+  //  title: 'Home',
+  //  icon: HomeIcon,
+  //  to: '/',
+  //},
   {
     title: 'Candidates',
     icon: LightbulbIcon,
-    to: '/candidates',
+    to: '/',
   },
 ]
 

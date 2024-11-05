@@ -4,7 +4,7 @@ export interface Candidate {
   id?: number,
   first_name: string;
   last_name: string;
-  birt_date: string;
+  birth_date: string;
   skills: string;
   status: 'APPLIED' | 'REJECTED' | 'INVITED' | 'HIRED';
 }

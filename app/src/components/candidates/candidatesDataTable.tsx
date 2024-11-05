@@ -3,15 +3,15 @@ import { useEffect, useState } from "react"
 import { Candidate } from "@/types/candidates"
 import { DataTable } from "../ui/dataTable"
 import { columns } from "./candidateColumns"
+import useStore from "@/hooks/useStore"
 
 
 
 export default function CandidatesDataTable() {
-  const [ rows, setRows ] = useState<Candidate[]>([])
+  const data = useStore((state) => state.candidates.data)
 
   async function getData() {
-    const data = await useCandidates().read()
-    setRows(data)
+    await useCandidates().read()
   }
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function CandidatesDataTable() {
 
   return (
     <div>
-      <DataTable columns={columns} data={rows} />
+      <DataTable columns={columns} data={data} />
     </div>
   )
 }

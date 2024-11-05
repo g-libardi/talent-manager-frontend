@@ -32,6 +32,7 @@ const menuItems = [
 
 export function DefaultSidebar() {
   const userInfo = useAuth().getUserInfo()
+  const auth = useAuth()
   const navigate = useNavigate()
   return (
     <Sidebar>
@@ -54,7 +55,7 @@ export function DefaultSidebar() {
               </div>
             </MenubarTrigger>
             <MenubarContent>
-              <MenubarItem onClick={async() => useAuth().logout().then(() => navigate('/login'))}>
+              <MenubarItem onClick={async() => auth.logout().then(() => navigate('/login'))}>
                 Logout
               </MenubarItem>
             </MenubarContent>

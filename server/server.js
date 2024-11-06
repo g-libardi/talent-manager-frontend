@@ -8,7 +8,7 @@ const path = require('path');
 
 
 const app = express();
-const API_URL = process.env.API_URL || 'http://localhost:8000/api';
+const API_URL = process.env.API_URL || 'http://localhost:8000';
 
 app.use(cookieParser());
 app.use(express.json());
@@ -18,7 +18,7 @@ app.use(express.json());
 app.post('/api/login/token-pair', async (req, res) => {
   try {
     const { username, password } = req.body;
-    const apiResponse = await axios.post(`${API_URL}/login/token-pair/`, { username, password });
+    const apiResponse = await axios.post(`${API_URL}/api/login/token-pair/`, { username, password });
 
     const { access, refresh } = apiResponse.data;
 
@@ -41,7 +41,7 @@ app.post('/api/login/token-pair', async (req, res) => {
     return res.status(apiResponse.status).json(decoded);
   } catch (error) {
     console.error(error);
-    return res.status(401).json({ message: "Invalid credentials" });
+    return res.status(401).json({ message: "Invalid credentials." });
   }
 });
 
@@ -50,7 +50,7 @@ app.post('/api/login/token-pair', async (req, res) => {
 app.post('/api/login/access-token', async (req, res) => {
   try {
     const refreshToken = req.cookies['refresh_token'];
-    const apiResponse = await axios.post(`${API_URL}/login/access-token/`, { refresh: refreshToken });
+    const apiResponse = await axios.post(`${API_URL}/api/login/access-token/`, { refresh: refreshToken });
 
     const { access } = apiResponse.data;
 
@@ -78,7 +78,7 @@ app.delete('/api/login/token-pair', (_req, res) => {
 });
 
 
-app.use('/api', proxy('localhost:8000', {
+app.use('/api', proxy(API_URL, {
   proxyReqPathResolver: function(req) {
     return '/api' + req.url;
   },

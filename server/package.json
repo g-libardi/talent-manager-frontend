@@ -15,6 +15,6 @@
     "server": "nodemon server.js",
     "client": "npm --prefix ../app run devhost",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "npm --prefix ../app run build && cp -r ../app/dist/* ./static/."
+    "build": "npm --prefix ../app run build && mkdir -p ./static/ && rm -r ./static/*; cp -r ../app/dist/* ./static/."
   }
 }

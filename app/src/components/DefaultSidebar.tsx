@@ -9,7 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { HomeIcon, LightbulbIcon, UserIcon } from "lucide-react"
+import { LightbulbIcon, UserIcon } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 import { Avatar, AvatarFallback } from "./ui/avatar"
 import useAuth from "@/hooks/useAuth"

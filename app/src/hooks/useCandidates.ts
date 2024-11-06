@@ -6,7 +6,6 @@ import useStore from "./useStore";
 
 export default function useCandidates() {
   const toast = useToast();
-  const getStore = useStore.getState;
   const setStore = useStore.setState;
 
 

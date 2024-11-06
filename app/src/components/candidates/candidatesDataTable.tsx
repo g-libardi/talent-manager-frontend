@@ -1,6 +1,5 @@
 import useCandidates from "@/hooks/useCandidates"
-import { useEffect, useState } from "react"
-import { Candidate } from "@/types/candidates"
+import { useEffect } from "react"
 import { DataTable } from "../ui/dataTable"
 import { columns } from "./candidateColumns"
 import useStore from "@/hooks/useStore"

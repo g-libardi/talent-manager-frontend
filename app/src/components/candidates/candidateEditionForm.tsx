@@ -8,8 +8,8 @@ import TagInput from '../ui/tag_input';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '../ui/select';
 import useCandidates from '@/hooks/useCandidates';
 import { Candidate } from '@/types/candidates';
-import { useEffect, useState } from 'react';
 import useStore from '@/hooks/useStore';
+import { useState } from 'react';
 
 
 const formSchema = z.object({
@@ -59,7 +59,7 @@ export default function CandidateEditionForm() {
     defaultValues: {
       first_name: candData!.first_name,
       last_name: candData!.last_name,
-      birth_date: candData!.birth_date,
+      birth_date: candData!.birth_date as unknown as Date,  // NOTE: workaround for "coerce" property from zod, there must be a better way to do this
       skills: candData!.skills.split(','),
       status: candData!.status || 'APPLIED',
     },

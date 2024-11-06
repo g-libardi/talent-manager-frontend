@@ -1,6 +1,5 @@
 import CandidatesDataTable from "@/components/candidates/candidatesDataTable";
 import CreateCandidate from "@/components/candidates/createCandidate";
-import EditCandidate from "@/components/candidates/EditCandidate";
 import { Card } from "@/components/ui/card";
 import { useEffect } from "react"
 

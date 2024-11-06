@@ -4,7 +4,6 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { Button } from "../ui/button"
 import { MoreHorizontalIcon } from "lucide-react"
 import useCandidates from "@/hooks/useCandidates"
-import useStore from "@/hooks/useStore"
 
 export const columns: ColumnDef<Candidate>[] = [
   {
@@ -37,16 +36,7 @@ export const columns: ColumnDef<Candidate>[] = [
     cell: ({row}) => {
       const candidate = row.original
       const candAPI = useCandidates()
-      const setStore = useStore.setState
 
-      function edit() {
-        setStore((state) => ({
-          candidates: {
-            ...state.candidates,
-            toEdit: candidate.id as number,
-          },
-        }));
-      }
 
       return (
         <DropdownMenu>

@@ -65,7 +65,7 @@ export default function useAuth() {
 
     function verifyToken() {
         const token = useStore.getState().auth.accessToken as AccessToken;
-        const refToken = useStore.getState().auth.refreshToken;
+        const refToken = useStore.getState().auth.refreshToken as AccessToken;
         if (!token || !refreshToken) return false;
         if (token.exp < Date.now() / 1000) {
             if (refToken.exp < Date.now() / 1000) {
